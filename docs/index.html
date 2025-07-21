@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VolunteerMD - Clinical Volunteering Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    .tag.req-police {
+      background: #00acc1; /* teal */
+      box-shadow: 0 0 6px #e53935;
+    }
+    .tag.req-vaccine {
+      background: #43a047; /* green */
+      box-shadow: 0 0 6px #43a047;
+    }
+    .tag.req-training {
+      background: #1e88e5; /* blue */
+      box-shadow: 0 0 6px #1e88e5;
+    }
+    .tag.req-age {
+      background: #f4511e; /* orange */
+      box-shadow: 0 0 6px #f4511e;
+    }
+    .tag.req-tb {
+      background: #6d4c41; /* brown */
+      box-shadow: 0 0 6px #6d4c41;
+    }
+    .tag.req-other {
+      background: #8e24aa; /* purple fallback */
+      box-shadow: 0 0 6px #8e24aa;
+    }
+
+
+    .resource-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .resource-card:hover {
+      transform: scale(1.03);
+    }
+
+    .resource-card h3 {
+      font-size: 1.7rem;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .resource-card p {
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    .resource-card a {
+      color: #ddd;
+      text-decoration: underline;
+    }
+
+    .resource-card a:hover {
+      color: var(--primary-color);
+    }
+
+
+
+
+    .mission-statement {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 15px auto;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.5);
+    }
+
+    .mission-statement h3 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mission-statement p {
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+
+    header p {
+      font-size: 1.5rem; /* Try 1.5rem or larger for more impact */
+      margin-top: 0.5em;  /* Optional: tighten or loosen spacing */
+      color: #ccc;        /* Optional: tweak color if needed */
+    }
+
+
+    .banner-icon-text {
+      font-size: 5rem; /* or whatever size you want */
+    }
+
+    header h1 {
+      margin-bottom: -0.5em;  /* reduce space below the h1 */
+    }
+
+    header p {
+      margin-top: -0.5em;     /* reduce space above the p */
+    }
+
+
+    .banner-icon-text {
+      display: inline-flex;
+      align-items: center; /* vertical centering */
+      gap: 1.000em;          /* consistent spacing instead of margin-right */
+    }
+
+    .banner-icon {
+      height: 2.0em;
+      margin-right: -1.3em;       /* slightly bigger for better balance */
+      display: block;      /* fix baseline alignment issues */
+      user-select: none;
+      /* optional tweak if image looks slightly off vertically */
+      /* margin-top: -2px; */
+    }
+
+    #clear-saved {
+      background: #444;
+      color: #ccc;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #clear-saved:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+
+    .save-button {
+      background: var(--button-bg);
+      border: none;
+      color: var(--text-color);
+      padding: 8px 18px;
+      margin-top: 12px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(211, 47, 47, 0.3);
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .save-button:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 0 12px var(--primary-color);
+    }
+
+    :root {
+      --primary-color: #d32f2f;
+      --background-dark: #111;
+      --text-color: #f5f5f5;
+      --shadow: rgba(0, 0, 0, 0.2);
+      --button-bg: rgba(211, 47, 47, 0.2);
+      --button-bg-active: #d32f2f;
+      --button-color-active: #fff;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--background-dark);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    header, nav, .content-section, footer {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      margin: 20px auto;
+      max-width: 1000px;
+      padding: 20px;
+      box-shadow: 0 4px 10px var(--shadow);
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      cursor: pointer;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    nav a:hover, nav a.active {
+      color: #fff;
+      background-color: var(--primary-color);
+      box-shadow: 0 0 8px var(--primary-color);
+    }
+    .content-section {
+      display: none;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px var(--shadow);
+      text-align: center;
+    }
+    .visible {
+      display: block;
+    }
+    .home-text {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .home-text h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 0.5em;
+    }
+    .home-text p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5em;
+      color: #ddd;
+    }
+    .cta-button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px var(--primary-color);
+      transition: background-color 0.3s ease;
+    }
+    .cta-button:hover {
+      background: #a02525;
+    }
+    .about-stat {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 30px 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.7);
+      transition: transform 0.3s ease;
+    }
+    .about-stat:hover {
+      transform: scale(1.05);
+    }
+    .about-stat h3 {
+      font-size: 3.5rem;
+      color: var(--primary-color);
+      margin: 0 0 10px 0;
+      font-weight: 800;
+      user-select: none;
+    }
+    .about-stat p {
+      font-size: 1.1rem;
+      color: #eee;
+      margin: 0;
+    }
+    .opportunity {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin: 20px auto;
+      max-width: 700px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: box-shadow 0.3s ease;
+    }
+    .opportunity:hover {
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.7);
+    }
+    .opportunity h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-weight: 700;
+    }
+    .opportunity p {
+      color: #ccc;
+      font-size: 1rem;
+      margin-top: 0.3em;
+    }
+    .tags {
+      margin-top: 12px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 50px;
+      padding: 6px 18px;
+      margin: 5px 8px 0 0;
+      font-size: 0.85rem;
+      user-select: none;
+      font-weight: 600;
+      box-shadow: 0 0 6px var(--primary-color);
+    }
+    /* New filter buttons container and buttons style */
+    #filters {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      text-align: left;
+      user-select: none;
+    }
+    .filter-group {
+      margin-bottom: 15px;
+    }
+    .filter-group-label {
+      color: #eee;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .filter-button {
+      background: var(--button-bg);
+      border: none;
+      padding: 8px 18px;
+      border-radius: 50px;
+      color: var(--text-color);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(211, 47, 47, 0.3);
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      outline-offset: 2px;
+    }
+    .filter-button:hover {
+      background-color: var(--primary-color);
+      color: var(--button-color-active);
+      box-shadow: 0 0 12px var(--primary-color);
+    }
+    .filter-button.active {
+      background-color: var(--button-bg-active);
+      color: var(--button-color-active);
+      box-shadow: 0 0 12px var(--primary-color);
+    }
+    #clear-filters {
+      background: #444;
+      color: #ccc;
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: none;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    #clear-filters:hover {
+      background: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 0 12px var(--primary-color);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      margin: 40px auto 30px auto;
+      max-width: 1000px;
+      user-select: none;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-color);
+      font-size: 1rem;
+      resize: vertical;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+      transition: background-color 0.3s ease;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      background-color: rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px var(--primary-color);
+    }
+    form button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 700;
+      width: 100%;
+      box-shadow: 0 4px 15px var(--primary-color);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    form button:hover {
+      background: #a02525;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6em;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        cursor: pointer;
+        user-select: none;
+        line-height: 1.2;
+      }
+
+      .banner-icon {
+        height: 1.5em;
+        display: block;
+        user-select: none;
+      }
+
+      .home-text h2 {
+        font-size: 2rem;
+      }
+      .about-stat h3 {
+        font-size: 2.5rem;
+      }
+      .filter-buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="showSection('home')" tabindex="0" role="button" aria-label="Go to Home">
+      <span class="banner-icon-text">
+        <img src="transparentLogo.png" class="banner-icon" />
+        VolunteerMD
+      </span>
+    </h1>
+    <p>Your gateway to clinical volunteering</p>
+  </header>
+
+
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#home" onclick="showSection('home'); return false;" class="active" tabindex="0">Home</a>
+    <a href="#opportunities" onclick="showSection('opportunities'); return false;" tabindex="0">Opportunities</a>
+    <a href="#resources" onclick="showSection('resources'); return false;" tabindex="0">Resources (In Progress)</a>
+    <a href="#about" onclick="showSection('about'); return false;" tabindex="0">About Us</a>
+    <a href="#contact" onclick="showSection('contact'); return false;" tabindex="0">Contact</a>
+    <a href="#saved" onclick="showSection('saved'); renderSavedOpportunities(); return false;" tabindex="0">Saved</a>
+  </nav>
+
+  <section id="home" class="content-section visible" tabindex="0">
+    <div class="home-text">
+      
+      <h2>Welcome to VolunteerMD</h2>
+      <p>Connecting aspiring medical professionals with clinical volunteering opportunities.</p>
+      <button class="cta-button" onclick="showSection('opportunities')">Find Opportunities</button>
+    </div>
+  </section>
+
+  <section id="opportunities" class="content-section" tabindex="0">
+    <h2>Opportunities</h2>
+
+    <!-- FILTER BUTTONS -->
+    <div id="filters" aria-label="Filter volunteer opportunities">
+      <div class="filter-group" aria-label="Filter by location">
+        <span class="filter-group-label">Location (City):</span>
+        <div class="filter-buttons" role="group" aria-label="Location filters">
+          <button type="button" class="filter-button" data-filter-group="location" data-filter-value="Toronto">Toronto</button>
+          <button type="button" class="filter-button" data-filter-group="location" data-filter-value="Vancouver">Vancouver</button>
+          <button type="button" class="filter-button" data-filter-group="location" data-filter-value="Calgary">Calgary</button>
+          <button type="button" class="filter-button" data-filter-group="location" data-filter-value="New York">New York</button>
+          <button type="button" class="filter-button" data-filter-group="location" data-filter-value="Chicago">Chicago</button>
+        </div>
+      </div>
+      <div class="filter-group" aria-label="Filter by time commitment">
+        <span class="filter-group-label">Time Commitment:</span>
+        <div class="filter-buttons" role="group" aria-label="Time commitment filters">
+          <button type="button" class="filter-button" data-filter-group="time" data-filter-value="1 week">1 week</button>
+          <button type="button" class="filter-button" data-filter-group="time" data-filter-value="1 month">1 month</button>
+          <button type="button" class="filter-button" data-filter-group="time" data-filter-value="3 months">3 months</button>
+          <button type="button" class="filter-button" data-filter-group="time" data-filter-value="6 months">6 months</button>
+          <button type="button" class="filter-button" data-filter-group="time" data-filter-value="Flexible">Flexible</button>
+        </div>
+      </div>
+      <div class="filter-group" aria-label="Filter by subject">
+        <span class="filter-group-label">Volunteering Subject:</span>
+        <div class="filter-buttons" role="group" aria-label="Subject filters">
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Pediatrics">Pediatrics</button>
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Mental Health">Mental Health</button>
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Elderly Care">Elderly Care</button>
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Surgery">Surgery</button>
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Rehab">Rehab</button>
+          <button type="button" class="filter-button" data-filter-group="subject" data-filter-value="Public Health">Public Health</button>
+        </div>
+      </div>
+
+      <button id="clear-filters" type="button" aria-label="Clear all filters">Clear Filters</button>
+    </div>
+
+    <div id="opportunities-list">Loading opportunities...</div>
+  </section>
+
+  <section id="resources" class="content-section" tabindex="0">
+    <!-- <h2>Resources</h2> -->
+
+    <div class="resource-card">
+      <h3>Clinical Volunteering Guide</h3>
+      <p>Learn what counts as clinical experience, why it's important, and how to get started locally.</p>
+    </div>
+
+    <div class="resource-card">
+      <h3>Resume & Application Tips</h3>
+      <p>Pointers to make your resume and applications stand out.</p>
+    </div>
+
+    <div class="resource-card">
+      <h3>Interview Prep</h3>
+      <p>Prepare for common questions about your volunteering. </p>
+    </div>
+
+    <div class="resource-card">
+      <h3>Recommended Hours</h3>
+      <p>Getting general understanding of how many hours Canadian and U.S. med schools expect and how to track them efficiently.</p>
+    </div>
+
+  </section>
+
+  <section id="about" class="content-section" tabindex="0">
+    
+   <!--   <h2>About Us</h2>  -->
+    <div class="mission-statement">
+      <h3>Our Mission</h3>
+      <p>
+        We strive to make clinical experiences readily available to all aspiring medical school applicants.
+        By increasing the visibility of opportunities that often have limited outreach, we aim to support
+        students, hospitals, and patients by reducing stress and enhancing the overall volunteering experience.
+      </p>
+    </div>
+    <div class="about-stat">
+      <h3>92%</h3>
+      <p>of accepted premedical students reporting some healthcare-related experience, as per the AAMC.</p>
+    </div>
+    <div class="about-stat">
+      <h3>90+%</h3>
+      <p>of successful Canadian medical school applicants reported clinical exposure on their applications.</p>
+    </div>
+    <div class="about-stat">
+      <h3>Key</h3>
+      <p>Residency programs increasingly ask for documented clinical volunteering to demonstrate commitment and practical exposure.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="content-section" tabindex="0">
+    <h2>Contact</h2>
+    <form action="https://formspree.io/f/xjkobzqb" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button> <!-- ← This line was missing -->
+
+    </form>
+  </section>
+
+  <section id="saved" class="content-section" tabindex="0">
+    <h2>Saved Opportunities</h2>
+    <div id="saved-list">
+      <p>You haven't saved any opportunities yet.</p>
+    </div>
+    <button id="clear-saved" type="button">Clear Saved Opportunities</button>
+
+
+</section>
+
+
+  <footer>
+    <p> 2025 VolunteerMD | Connecting future doctors with real-world experience</p>
+  </footer>
+
+  <script>
+  // Navigation tab switching with active class
+  function showSection(id) {
+    document.querySelectorAll('nav a').forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+    document.querySelectorAll('.content-section').forEach(section => {
+      section.classList.toggle('visible', section.id === id);
+    });
+    const section = document.getElementById(id);
+    if (section) section.focus();
+  }
+
+  // Sample opportunities data
+  const sampleOpportunities = [
+  {
+    title: "Emergency Room Volunteer",
+    description: "Assist patients, help with non-medical tasks, and gain exposure to emergency care.",
+    location: "Toronto",
+    time: "6 months",
+    subject: "Public Health",
+    link: "https://www.torontogeneralhospital.ca/volunteer/emergency-room",
+    requirements: ["Police Background Check", "Immunization Record"]
+  },
+  {
+    title: "Community Clinic Volunteer",
+    description: "Support local clinics in patient intake and education.",
+    location: "Vancouver",
+    time: "1 month",
+    subject: "Public Health",
+    link: "https://www.vancouverclinic.org/volunteer/community",
+    requirements: ["Minimum Age: 18", "COVID-19 Vaccination"]
+  },
+  {
+    title: "Long-Term Care Volunteer",
+    description: "Support elderly residents with daily activities and companionship.",
+    location: "Calgary",
+    time: "Flexible",
+    subject: "Elderly Care",
+    link: "https://www.calgarycarecentre.ca/volunteer/longterm",
+    requirements: ["Police Background Check"]
+  },
+  {
+    title: "Pediatric Volunteer",
+    description: "Engage with children and assist staff in various departments.",
+    location: "Toronto",
+    time: "3 months",
+    subject: "Pediatrics",
+    link: "https://www.sickkids.ca/volunteer/pediatric-program",
+    requirements: ["Immunization Record", "Training Session Attendance"]
+  },
+  {
+    title: "Mental Health Support Volunteer",
+    description: "Assist in mental health outreach programs.",
+    location: "New York",
+    time: "1 week",
+    subject: "Mental Health",
+    link: "https://www.nymentalwellness.org/volunteer/support",
+    requirements: ["Police Background Check"]
+  },
+  {
+    title: "Surgical Ward Volunteer",
+    description: "Provide support and comfort to surgical patients.",
+    location: "Chicago",
+    time: "Flexible",
+    subject: "Surgery",
+    link: "https://www.uchicagomedicalcenter.org/volunteer/surgical-ward",
+    requirements: ["TB Test", "Commitment Agreement"]
+  },
+  {
+    title: "Rehabilitation Center Volunteer",
+    description: "Help patients with physical therapy routines.",
+    location: "Vancouver",
+    time: "3 months",
+    subject: "Rehab",
+    link: "https://www.vanrehabcentre.ca/volunteer/therapy",
+    requirements: ["Training Session Attendance"]
+  },
+  {
+    title: "Homeless Shelter Health Assistant",
+    description: "Provide basic health education and support at shelters.",
+    location: "Calgary",
+    time: "1 week",
+    subject: "Public Health",
+    link: "https://www.calgaryshelter.org/volunteer/health-assistant",
+    requirements: ["Minimum Age: 18", "COVID-19 Vaccination"]
+  },
+  {
+    title: "Child Life Volunteer",
+    description: "Support hospitalized children through play, crafts, and emotional support.",
+    location: "Toronto",
+    time: "1 month",
+    subject: "Pediatrics",
+    link: "https://www.sickkids.ca/volunteer/child-life",
+    requirements: ["Immunization Record", "Police Background Check"]
+  },
+  {
+    title: "Mental Health Outreach Assistant",
+    description: "Join a mobile unit providing support and wellness checks to vulnerable populations.",
+    location: "Vancouver",
+    time: "Flexible",
+    subject: "Mental Health",
+    link: "https://www.vancouvermentalhealth.org/volunteer/outreach",
+    requirements: ["Training Session Attendance"]
+  },
+  {
+    title: "Surgical Patient Navigator",
+    description: "Guide patients and families through the surgical process and provide comfort.",
+    location: "New York",
+    time: "3 months",
+    subject: "Surgery",
+    link: "https://www.nysurgerycenter.org/volunteer/navigator",
+    requirements: ["Police Background Check", "TB Test"]
+  },
+  {
+    title: "Rehab Therapy Volunteer",
+    description: "Assist physiotherapists and motivate patients through exercises and routines.",
+    location: "Chicago",
+    time: "1 week",
+    subject: "Rehab",
+    link: "https://www.chicagorehab.org/volunteer/therapy-support",
+    requirements: ["Commitment Agreement"]
+  },
+  {
+    title: "Public Health Education Booth",
+    description: "Run a public health awareness table at community events.",
+    location: "Calgary",
+    time: "6 months",
+    subject: "Public Health",
+    link: "https://www.albertahealth.ca/volunteer/education-booth",
+    requirements: ["COVID-19 Vaccination", "Minimum Age: 16"]
+  },
+  {
+    title: "Elderly Wellness Caller",
+    description: "Make regular phone check-ins with isolated senior citizens.",
+    location: "Vancouver",
+    time: "Flexible",
+    subject: "Elderly Care",
+    link: "https://www.vaneldercare.ca/volunteer/wellness-caller",
+    requirements: ["Phone Interview"]
+  },
+  {
+    title: "Pediatric Clinic Helper",
+    description: "Assist staff at a pediatric walk-in clinic and engage with young patients.",
+    location: "Toronto",
+    time: "3 months",
+    subject: "Pediatrics",
+    link: "https://www.torontopediatrics.ca/volunteer/clinic-helper",
+    requirements: ["Police Background Check", "Training Session Attendance"]
+  },
+  {
+    title: "Trauma Center Support Volunteer",
+    description: "Help with logistics and patient support in a high-paced trauma unit.",
+    location: "Chicago",
+    time: "1 month",
+    subject: "Surgery",
+    link: "https://www.chicagotraumacenter.org/volunteer/support",
+    requirements: ["Immunization Record"]
+  },
+  {
+    title: "Teen Mental Health Group Assistant",
+    description: "Help run peer-support groups for teens struggling with anxiety and depression.",
+    location: "New York",
+    time: "1 month",
+    subject: "Mental Health",
+    link: "https://www.mentalhealthnyc.org/volunteer/teen-support",
+    requirements: ["Police Background Check", "Training Session Attendance"]
+  },
+  {
+    title: "Long-Term Care Art Facilitator",
+    description: "Lead art therapy sessions in a long-term care facility.",
+    location: "Calgary",
+    time: "6 months",
+    subject: "Elderly Care",
+    link: "https://www.calgarycarecentre.ca/volunteer/art-therapy",
+    requirements: ["Portfolio Submission", "Minimum Age: 18"]
+  }
+];
+
+
+  // Filters
+  const activeFilters = {
+    location: null,
+    time: null,
+    subject: null
+  };
+
+  function renderOpportunities() {
+    const container = document.getElementById('opportunities-list');
+    container.innerHTML = '';
+
+    const filteredOpps = sampleOpportunities.filter(opp => {
+      if (activeFilters.location && opp.location !== activeFilters.location) return false;
+      if (activeFilters.time && opp.time !== activeFilters.time) return false;
+      if (activeFilters.subject && opp.subject !== activeFilters.subject) return false;
+      return true;
+    });
+
+    if (filteredOpps.length === 0) {
+      container.innerHTML = '<p>No opportunities match your selected filters.</p>';
+      return;
+    }
+
+    filteredOpps.forEach(opp => {
+      const div = document.createElement('div');
+      div.className = 'opportunity';
+      div.innerHTML = `
+        <h3>${opp.title}</h3>
+        <p>${opp.description}</p>
+        <div class="tags">
+          <span class="tag">Location: ${opp.location}</span>
+          <span class="tag">Time: ${opp.time}</span>
+          <span class="tag">Subject: ${opp.subject}</span>
+          ${opp.requirements?.map(req => {
+            const normalized = req.toLowerCase();
+            let reqClass = 'req-other';
+            if (normalized.includes('police')) reqClass = 'req-police';
+            else if (normalized.includes('vaccine') || normalized.includes('immunization')) reqClass = 'req-vaccine';
+            else if (normalized.includes('training')) reqClass = 'req-training';
+            else if (normalized.includes('age')) reqClass = 'req-age';
+            else if (normalized.includes('tb')) reqClass = 'req-tb';
+
+            return `<span class="tag requirement ${reqClass}">${req}</span>`;
+          }).join('')}
+
+        </div>
+        <span class="tag">
+          <a href="${opp.link}" target="_blank" style="color: inherit; text-decoration: none;">Link to Application Site</a>
+        </span>
+
+        <button class="save-button" data-title="${opp.title}">Save</button>
+      `;
+
+      container.appendChild(div);
+    });
+
+    setupSaveButtons();
+  }
+
+  function setupFilters() {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const group = button.getAttribute('data-filter-group');
+        const value = button.getAttribute('data-filter-value');
+
+        if (activeFilters[group] === value) {
+          activeFilters[group] = null;
+          button.classList.remove('active');
+        } else {
+          document.querySelectorAll(`.filter-button[data-filter-group="${group}"].active`).forEach(btn => {
+            btn.classList.remove('active');
+          });
+          activeFilters[group] = value;
+          button.classList.add('active');
+        }
+        renderOpportunities();
+      });
+    });
+
+    const clearBtn = document.getElementById('clear-filters');
+    clearBtn.addEventListener('click', () => {
+      activeFilters.location = null;
+      activeFilters.time = null;
+      activeFilters.subject = null;
+      document.querySelectorAll('.filter-button.active').forEach(btn => btn.classList.remove('active'));
+      renderOpportunities();
+    });
+  }
+
+  function setupSaveButtons() {
+    document.querySelectorAll('.save-button').forEach(button => {
+      const title = button.getAttribute('data-title');
+      const saved = JSON.parse(localStorage.getItem('savedOpportunities')) || [];
+
+      if (saved.includes(title)) {
+        button.textContent = 'Saved!';
+        button.disabled = true;
+      }
+
+      button.addEventListener('click', () => {
+        let savedList = JSON.parse(localStorage.getItem('savedOpportunities')) || [];
+
+        if (!savedList.includes(title)) {
+          savedList.push(title);
+          localStorage.setItem('savedOpportunities', JSON.stringify(savedList));
+          button.textContent = 'Saved!';
+          button.disabled = true;
+        }
+      });
+    });
+  }
+
+  function renderSavedOpportunities() {
+    const container = document.getElementById('saved-list');
+    container.innerHTML = '';
+
+    const saved = JSON.parse(localStorage.getItem('savedOpportunities')) || [];
+
+    if (saved.length === 0) {
+      container.innerHTML = '<p>You haven\'t saved any opportunities yet.</p>';
+      return;
+    }
+
+    const savedOpportunities = sampleOpportunities.filter(opp => saved.includes(opp.title));
+
+    savedOpportunities.forEach(opp => {
+      const div = document.createElement('div');
+      div.className = 'opportunity';
+      div.innerHTML = `
+        <h3>${opp.title}</h3>
+        <p>${opp.description}</p>
+        <div class="tags">
+          <span class="tag">Location: ${opp.location}</span>
+          <span class="tag">Time: ${opp.time}</span>
+          <span class="tag">Subject: ${opp.subject}</span>
+          ${opp.requirements?.map(req => {
+            const normalized = req.toLowerCase();
+            let reqClass = 'req-other';
+            if (normalized.includes('police')) reqClass = 'req-police';
+            else if (normalized.includes('vaccine') || normalized.includes('immunization')) reqClass = 'req-vaccine';
+            else if (normalized.includes('training')) reqClass = 'req-training';
+            else if (normalized.includes('age')) reqClass = 'req-age';
+            else if (normalized.includes('tb')) reqClass = 'req-tb';
+
+            return `<span class="tag requirement ${reqClass}">${req}</span>`;
+          }).join('')}
+
+        </div>
+        <span class="tag">
+          <a href="${opp.link}" target="_blank" style="color: inherit; text-decoration: none;">Link to Application Site</a>
+        </span>
+      `;
+      container.appendChild(div);
+    });
+
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderOpportunities();
+    setupFilters();
+  });
+
+  document.getElementById('clear-saved').addEventListener('click', () => {
+    localStorage.removeItem('savedOpportunities');
+    renderSavedOpportunities();
+  });
+
+</script>
+
+</body>
+</html>

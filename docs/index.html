@@ -979,8 +979,10 @@
 
   document.getElementById('clear-saved').addEventListener('click', () => {
     localStorage.removeItem('savedOpportunities');
-    renderSavedOpportunities();
+    renderSavedOpportunities();   // refresh Saved tab
+    renderOpportunities();        // refresh Opportunities tab to update button states
   });
+
 
 </script>
 

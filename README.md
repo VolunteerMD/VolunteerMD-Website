@@ -16,6 +16,6 @@ Some features include
 
 For questions or feedback, please reach out at volunteermd.org@gmail.com.
 
-Disclaimer: Majority of the coding behind this website was AI generated.
+Disclaimer: The majority of the coding behind this website was AI generated.
 
 Thanks!

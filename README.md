@@ -11,11 +11,10 @@ Some features include
 - Contact form for inquiries
 
 ## Note
+- The majority of the coding behind this website was AI generated.
 - VolunteerMD is currently in early stages of development as we begin our search for volunteering opportunities.
 - We are continuing to build the algorithms required to fully power the matching process.
 
 For questions or feedback, please reach out at volunteermd.org@gmail.com.
-
-Disclaimer: The majority of the coding behind this website was AI generated.
 
 Thanks!

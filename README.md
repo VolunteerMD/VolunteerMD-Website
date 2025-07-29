@@ -1,6 +1,6 @@
 ## Welcome to the VolunteerMD Website
 
-VolunteerMD is a clinical volunteering portal designed to help aspiring medical students easily find and apply to clinical volunteer opportunities.
+VolunteerMD is a clinical volunteering portal designed to help aspiring medical students easily find and apply to patient-oriented volunteer opportunities.
 
 This is currently a prototype website with mock opportunities to display the features of this website.
 

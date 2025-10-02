@@ -1,0 +1,35 @@
+{
+  "name": "volunteermd-website",
+  "version": "1.0.0",
+  "description": "VolunteerMD is a volunteering portal designed to help aspiring medical students easily find and apply to patient-oriented volunteer opportunities.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "test": "cross-env NODE_ENV=test DATABASE_PATH=./data/test.sqlite JWT_SECRET=test-secret OPPORTUNITY_SOURCE=sample OPPORTUNITY_SAMPLE_PATH=./data/sample-opportunities.csv OPPORTUNITY_CACHE_TTL_MINUTES=1 COOKIE_SECURE=false vitest run",
+    "test:watch": "cross-env NODE_ENV=test DATABASE_PATH=./data/test.sqlite JWT_SECRET=test-secret OPPORTUNITY_SOURCE=sample OPPORTUNITY_SAMPLE_PATH=./data/sample-opportunities.csv OPPORTUNITY_CACHE_TTL_MINUTES=1 COOKIE_SECURE=false vitest"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "keywords": [],
+  "author": "VolunteerMD Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.1",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "papaparse": "^5.5.3"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}

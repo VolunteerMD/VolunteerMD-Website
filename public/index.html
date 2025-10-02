@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VolunteerMD – Patient-Oriented Volunteering Opportunities</title>
+  <link rel="icon" type="image/png" href="assets/black-transparent.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="banner-icon-text">
+      <img src="assets/transparentLogo.png" alt="VolunteerMD Logo" class="banner-icon" />
+      <div>
+        <h1>VolunteerMD</h1>
+        <p>Patient-centered volunteering for aspiring medical students</p>
+      </div>
+    </div>
+    <nav aria-label="Primary">
+      <a href="#home" data-section="home" class="active">Home</a>
+      <a href="#opportunities" data-section="opportunities">Opportunities</a>
+      <a href="#saved" data-section="saved">Saved</a>
+      <a href="#account" data-section="account">Account</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="content-section visible" tabindex="0">
+      <div class="home-text">
+        <h2>Clinical volunteering without the scavenger hunt</h2>
+        <p>
+          Discover vetted, patient-oriented opportunities curated for pre-med and medical learners.
+          Filter by subject, location, and commitment, save favourites, and track requirements in one place.
+        </p>
+        <button class="cta-button" data-section-target="opportunities">Browse Opportunities</button>
+      </div>
+      <div class="resource-card" role="complementary">
+        <h3>Need help getting started?</h3>
+        <p>
+          Send us a note with your interests and our volunteer success team will point you to the best fits.
+        </p>
+        <a href="#contact" data-section="contact">Contact VolunteerMD</a>
+      </div>
+    </section>
+
+    <section id="opportunities" class="content-section" tabindex="0">
+      <h2>Opportunities</h2>
+      <div id="search-wrap">
+        <input id="search-input" type="search" placeholder="Search by title, organization, or keyword" aria-label="Search opportunities" />
+        <button id="search-clear" type="button" aria-label="Clear search">Clear</button>
+      </div>
+
+      <div id="filters" aria-label="Filters">
+        <div class="filter-group">
+          <span class="filter-group-label">Location</span>
+          <div class="filter-buttons" id="filter-locations"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-group-label">Subject</span>
+          <div class="filter-buttons" id="filter-subjects"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-group-label">Time Commitment</span>
+          <div class="filter-buttons" id="filter-times"></div>
+        </div>
+        <button id="clear-filters" type="button">Clear Filters</button>
+      </div>
+
+      <div id="opportunities-list" class="opportunities-list" aria-live="polite">Loading opportunities…</div>
+    </section>
+
+    <section id="saved" class="content-section" tabindex="0">
+      <h2>Saved Opportunities</h2>
+      <div id="saved-hint" class="info-banner" hidden>
+        <p>Sign in to save opportunities and sync them across devices.</p>
+      </div>
+      <div id="saved-list">You have not saved any opportunities yet.</div>
+    </section>
+
+    <section id="account" class="content-section" tabindex="0">
+      <h2>Your Account</h2>
+      <div id="account-status" class="info-banner"></div>
+
+      <div class="account-grid">
+        <form id="register-form" novalidate>
+          <h3>Create an Account</h3>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" autocomplete="new-password" minlength="8" required />
+          </label>
+          <p class="form-hint">At least 8 characters with a mix of letters and numbers.</p>
+          <button type="submit">Sign Up</button>
+        </form>
+
+        <form id="login-form" novalidate>
+          <h3>Sign In</h3>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Log In</button>
+        </form>
+
+        <div id="account-actions" class="account-actions" hidden>
+          <h3>Welcome back!</h3>
+          <p id="account-email"></p>
+          <button id="logout-button" type="button">Log Out</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="content-section" tabindex="0">
+      <div class="mission-statement">
+        <h3>Our Mission</h3>
+        <p>
+          VolunteerMD highlights patient-oriented volunteering roles so future clinicians can build authentic experience while supporting the communities they hope to serve. We partner with hospitals and community clinics to surface transparent requirements, accurate contacts, and realistic commitments.
+        </p>
+      </div>
+      <div class="about-stat">
+        <h3>90%+</h3>
+        <p>of successful Canadian medical school applicants report direct patient-facing volunteer experience.</p>
+      </div>
+      <div class="about-stat">
+        <h3>End-to-end support</h3>
+        <p>We help you track prerequisites, document hours, and stay in the loop when new roles open.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="content-section" tabindex="0">
+      <h2>Contact Us</h2>
+      <form id="contact-form" novalidate>
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" minlength="10" required></textarea>
+        </label>
+        <button type="submit">Send Message</button>
+      </form>
+      <div id="contact-feedback" class="info-banner" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> VolunteerMD. Connecting future physicians with real-world clinical experience.</p>
+  </footer>
+
+  <template id="opportunity-card-template">
+    <article class="opportunity" aria-live="polite">
+      <div class="opportunity-header">
+        <div class="opportunity-org"></div>
+        <h3 class="opportunity-title"></h3>
+      </div>
+      <p class="opportunity-description"></p>
+      <div class="tags"></div>
+      <div class="opportunity-actions">
+        <a class="opportunity-link" target="_blank" rel="noopener noreferrer">Application</a>
+        <button class="save-button" type="button">Save</button>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

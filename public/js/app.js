@@ -560,18 +560,26 @@ function clearAuthMessage() {
 
 function updateAccountUi() {
   if (state.user) {
-    dom.accountActions.hidden = false;
+    dom.accountActions.removeAttribute('hidden');
+    dom.accountActions.style.display = 'block';
+
     dom.accountEmail.textContent = state.user.email;
+
     dom.registerForm.style.display = 'none';
     dom.loginForm.style.display = 'none';
     clearAuthMessage();
   } else {
-    dom.accountActions.hidden = true;
+    dom.accountActions.setAttribute('hidden', 'true');
+    dom.accountActions.style.display = 'none';
+
     dom.accountEmail.textContent = '';
+
     dom.registerForm.style.display = '';
     dom.loginForm.style.display = '';
   }
 }
+
+
 
 function setLoading(value) {
   state.loading = value;

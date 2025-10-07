@@ -838,6 +838,49 @@ header.scrolled {
   background: rgba(255,255,255,0.05) !important;
 }
 
+/* Welcome back box styles */
+.welcome-box {
+  max-width: 400px;
+  margin: 3em auto;
+  padding: 2em;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: var(--text-color);
+  backdrop-filter: blur(4px);
+}
+
+.welcome-box h3 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color);
+}
+
+.welcome-box p {
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.welcome-box button {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1em;
+  padding: 0.6em 1.4em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.welcome-box button:hover {
+  background-color: #b71c1c;
+}
+
+
 
 
 

@@ -374,7 +374,11 @@ function classForRequirement(text) {
   if (normalized.includes('training')) return 'req-training';
   if (normalized.includes('age')) return 'req-age';
   if (normalized.includes('tb')) return 'req-tb';
-  return 'req-other';
+  if (normalized.includes('consent')) return 'req-consent';
+  if (normalized.includes('reference')) return 'req-reference';
+  if (normalized.includes('form')) return 'req-form';
+  if (normalized.includes('vulnerable')) return 'req-vulnerable';
+  return 'req-other'
 }
 
 function formatRequirement(text) {
@@ -408,17 +412,19 @@ function createOpportunityCard(opportunity, options = {}) {
     orgEl.appendChild(span);
   }
 
-  const addTag = (label, value) => {
+  const addTag = (label, value, type = '') => {
     if (!value) return;
     const tag = document.createElement('span');
-    tag.className = 'tag';
+    tag.className = `tag ${type}`;
     tag.textContent = `${label}: ${value}`;
     tagsEl.appendChild(tag);
   };
 
-  addTag('Location', opportunity.location);
-  addTag('Time', opportunity.timeCommitment);
-  addTag('Subject', opportunity.subject);
+
+  addTag('Location', opportunity.location, 'tag-location');
+  addTag('Time', opportunity.timeCommitment, 'tag-time');
+  addTag('Subject', opportunity.subject, 'tag-subject');
+
 
   const requirements = Array.isArray(opportunity.requirements) ? opportunity.requirements : [];
   requirements.forEach((req) => {
@@ -430,12 +436,7 @@ function createOpportunityCard(opportunity, options = {}) {
     tagsEl.appendChild(tag);
   });
 
-  if (opportunity.sourceName) {
-    const tag = document.createElement('span');
-    tag.className = 'tag';
-    tag.textContent = `Source: ${opportunity.sourceName}`;
-    tagsEl.appendChild(tag);
-  }
+  
 
   linkEl.href = opportunity.link;
   linkEl.textContent = 'Application';

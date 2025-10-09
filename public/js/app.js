@@ -822,6 +822,31 @@ async function initialize() {
   await fetchCurrentUser();
   await loadOpportunities();
 
+  console.log("Debug: Current pathname =", window.location.pathname);
+
+  const path = window.location.pathname.replace(/^\/|\/$/g, '').toLowerCase();
+  console.log("Debug: Parsed path =", path);
+  
+  const hospitalMap = {
+    covenant: 'Covenant Health',
+    ach: "Alberta Children's Hospital",
+    hospicecalgary: 'Hospice Calgary'
+  };
+  
+  if (hospitalMap[path]) {
+    console.log("Debug: Matched hospital =", hospitalMap[path]);
+    state.filtered = state.opportunities.filter(
+      opp =>
+        opp.organization &&
+        opp.organization.toLowerCase().includes(hospitalMap[path].toLowerCase())
+    );
+    renderOpportunities();
+  } else {
+    console.log("Debug: No match for path; applying default filters");
+    applyFilters();
+  }
+
+
 
   const path = window.location.pathname.replace('/', '').toLowerCase();
   const hospitalMap = {

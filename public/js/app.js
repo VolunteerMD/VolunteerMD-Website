@@ -818,9 +818,40 @@ async function initialize() {
   setupAuthForms();
   setupContactForm();
 
+
   await fetchCurrentUser();
   await loadOpportunities();
+
+
+  const path = window.location.pathname.replace('/', '').toLowerCase();
+  const hospitalMap = {
+    covenant: 'Covenant Health',
+    hospicecalgary: 'Hospice Calgary',
+    ach: "Alberta Children's Hospital",
+    alzheimercalgary: 'Alzheimer Calgary'
+  };
+
+  if (hospitalMap[path]) {
+
+    state.filtered = state.opportunities.filter(
+      opp =>
+        opp.organization &&
+        opp.organization.toLowerCase().includes(hospitalMap[path].toLowerCase())
+    );
+
+
+    document.title = `${hospitalMap[path]} | VolunteerMD`;
+    const header = document.querySelector('.page-title');
+    if (header) header.textContent = `${hospitalMap[path]} Opportunities`;
+
+    renderOpportunities();
+  } else {
+
+    applyFilters();
+  }
+
   await loadFavorites();
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {

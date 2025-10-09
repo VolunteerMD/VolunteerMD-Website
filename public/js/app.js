@@ -826,32 +826,30 @@ async function initialize() {
 
 
 
-  const path = window.location.pathname.replace('/', '').toLowerCase();
+  const currentPath = window.location.pathname.replace('/', '').toLowerCase();
   const hospitalMap = {
     covenant: 'Covenant Health',
     hospicecalgary: 'Hospice Calgary',
     ach: "Alberta Children's Hospital",
     alzheimercalgary: 'Alzheimer Calgary'
   };
-
-  if (hospitalMap[path]) {
-
+  
+  if (hospitalMap[currentPath]) {
     state.filtered = state.opportunities.filter(
       opp =>
         opp.organization &&
-        opp.organization.toLowerCase().includes(hospitalMap[path].toLowerCase())
+        opp.organization.toLowerCase().includes(hospitalMap[currentPath].toLowerCase())
     );
-
-
-    document.title = `${hospitalMap[path]} | VolunteerMD`;
+  
+    document.title = `${hospitalMap[currentPath]} | VolunteerMD`;
     const header = document.querySelector('.page-title');
-    if (header) header.textContent = `${hospitalMap[path]} Opportunities`;
-
+    if (header) header.textContent = `${hospitalMap[currentPath]} Opportunities`;
+  
     renderOpportunities();
   } else {
-
     applyFilters();
   }
+
 
   await loadFavorites();
 

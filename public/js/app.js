@@ -378,6 +378,9 @@ function classForRequirement(text) {
   if (normalized.includes('reference')) return 'req-reference';
   if (normalized.includes('form')) return 'req-form';
   if (normalized.includes('vulnerable')) return 'req-vulnerable';
+  if (normalized.includes('physical')) return 'req-physical';
+  if (normalized.includes('push')) return 'req-push';
+  if (normalized.includes('skill')) return 'req-skill';
   return 'req-other'
 }
 
@@ -398,6 +401,18 @@ function createOpportunityCard(opportunity, options = {}) {
 
   titleEl.textContent = opportunity.title;
   descEl.textContent = opportunity.description || 'No description provided yet.';
+
+  // Description collapse/expand behavior
+  const toggleBtn = clone.querySelector('.toggle-description');
+  if (opportunity.description && opportunity.description.length > 150) {
+    toggleBtn.addEventListener('click', () => {
+      descEl.classList.toggle('collapsed');
+      toggleBtn.textContent = descEl.classList.contains('collapsed') ? 'Show more' : 'Show less';
+    });
+  } else {
+    toggleBtn.style.display = 'none'; // Hide toggle for very short descriptions
+  }
+
 
   orgEl.innerHTML = '';
   if (opportunity.orgLogo) {

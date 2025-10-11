@@ -809,10 +809,12 @@ function setupContactForm() {
     const payload = serializeForm(dom.contactForm);
 
     try {
-      await fetchJson('/api/contact', {
+      await fetch('https://formspree.io/f/xjkobzqb', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+
       dom.contactFeedback.textContent = 'Thanks! We received your message and will respond shortly.';
       dom.contactForm.reset();
     } catch (err) {
@@ -876,4 +878,3 @@ window.addEventListener('DOMContentLoaded', () => {
     dom.opportunitiesList.textContent = 'Initialization error. Please refresh the page.';
   });
 });
-

@@ -876,3 +876,4 @@ window.addEventListener('DOMContentLoaded', () => {
     dom.opportunitiesList.textContent = 'Initialization error. Please refresh the page.';
   });
 });
+

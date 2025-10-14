@@ -11,7 +11,6 @@
     "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6VuG6V33FJEJ0ghLbjiJtu_uaohKCPR0AA69OvpFC4LeS-nlPQrZjuO6hYAM6NL3PEP64THVqlcxv/pub?output=csv"
   },
 
-
   {
     "key": "alberta_children",
     "name": "Alberta Children\u2019s Hospital",
@@ -22,6 +21,30 @@
     "key": "covenant_health",
     "name": "Covenant Health",
     "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRjvjJXjk1M4HpvOMEEwRwzlf9s1Q7SRfGMntOXSLwdWkFCwctjd5KVQTF1zgHs8CxaxzRwFjk8w42w/pub?output=csv"
+  },
+
+  {
+    "key": "foothills_medical_centre",
+    "name": "Foothills Medical Centre",
+    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYzVgsVS1xOjQdhs15qZtGoF0Y0dldQrqndbSCyLy3Aks6ZUpsuiAhIJ7j_lh2jVuNYIONEFFKN6A1/pub?output=csv"
+  },
+
+  {
+    "key": "south_health_campus",
+    "name": "South Health Campus",
+    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvWCVHyIsHKRn0ry47TCCpEvkwd3U-5rdfIPYAXWnW_fCMtAYFdX0bIsu3XFBy6496aCuwo6p0uU6P/pub?output=csv"
+  },
+
+  {
+    "key": "peter_lougheed_centre",
+    "name": "Peter Lougheed Centre",
+    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSSEG9jBf6C84bHwAUrb5n6JGii4QRGR38U6MTYabaLVZfWYrXeOsm58Ct1HVjNh9v4c6k70e9r4qZT/pub?output=csv"
+  },
+
+  {
+    "key": "ahs_general",
+    "name": "Alberta Health Services",
+    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYRvBC1ZDnDq95BeNA_FWfZpsLLsxL9QyUnaOvSolYTojXRhQl-l11Fq12CkJ7-pCWbqli1cSn65_W/pub?output=csv"
   }
   
 ]

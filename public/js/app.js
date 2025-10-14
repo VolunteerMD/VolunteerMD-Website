@@ -451,6 +451,19 @@ function createOpportunityCard(opportunity, options = {}) {
     tagsEl.appendChild(tag);
   });
 
+  // Randomize color for req-other tags
+  tagsEl.querySelectorAll('.req-other').forEach(tag => {
+    const colors = [
+      '#a89132', '#00acc1', '#8e24aa', '#00c15d',
+      '#c100b4', '#eb347d', '#7134eb', '#3446eb',
+      '#f4511e', '#6d4c41', '#43a047'
+    ];
+    const random = colors[Math.floor(Math.random() * colors.length)];
+    tag.style.backgroundColor = random;
+    tag.style.boxShadow = `0 0 8px ${random}`;
+  });
+
+
   
 
   linkEl.href = opportunity.link;
